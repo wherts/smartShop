@@ -8,6 +8,8 @@ from checkout.checkout import CheckoutButton
 from header.header import Header
 from tab.tablayout import Tabs
 from scan.scan_page import Scan
+from nutrition.nutrition_page import Nutrition
+from search.search_page import Search
 
 title = "SmartShop"
 width = 700
@@ -33,6 +35,7 @@ def setup_layout():
 	receipt_container = tk.PanedWindow(parent, orient=tk.VERTICAL)
 	receipt_container.pack()
 
+	#just fill receipt to see it
 	receipt = Receipt(parent)
 	for i in range(12):
 		receipt.add_item("eggs", 3.99)
@@ -42,16 +45,14 @@ def setup_layout():
 	receipt_container.add(cobtn.get_root())
 
 	tabs = Tabs(parent)
-	frame1 = Scan(tabs.get_root())
-	# frame1 = Frame(tabs.get_root())
-	frame2 = Frame(tabs.get_root())
-	frame3 = Frame(tabs.get_root())
+	scan = Scan(tabs.get_root())
+	nutrition = Nutrition(tabs.get_root())
+	search = Search(tabs.get_root())
 
-	tabs.add_frame(frame1.get_root(), frame1.get_title())
-	tabs.add_frame(frame2, "Nutrition")
-	tabs.add_frame(frame3, "Search")
+	tabs.add_frame(scan.get_root(), scan.get_title())
+	tabs.add_frame(nutrition.get_root(), nutrition.get_title())
+	tabs.add_frame(search.get_root(), search.get_title())
 	
-	parent.add(Frame(parent))
 	parent.add(receipt_container)
 	parent.add(tabs.get_root())
 	parent.pack()

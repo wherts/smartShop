@@ -3,11 +3,11 @@ import Tkinter as tk
 from ttk import Frame, Style, Notebook
 
 #custom classes
-from receipt import Receipt
-from checkout import CheckoutButton
-from header import Header
-from tablayout import Tabs
-from scan_page import Scan
+from receipt.receipt import Receipt
+from checkout.checkout import CheckoutButton
+from header.header import Header
+from tab.tablayout import Tabs
+from scan.scan_page import Scan
 
 title = "SmartShop"
 width = 700

@@ -7,10 +7,12 @@ class Nutrition:
 	def __init__(self, parent):
 		self.title = "Nutrition"
 		self.root = Frame(parent)
-		# self.canvas = 
+		self.canvas = tk.Canvas(parent, bg="blue", height=250, width=300)
+		self.canvas.pack()
 
 	def get_root(self):
 		return self.root
 
 	def get_title(self):
 		return self.title
+

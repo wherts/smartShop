@@ -2,8 +2,6 @@
 import Tkinter as tk
 from ttk import Frame, Style, Notebook
 
-
-
 class Nutrition:
 	height = 450
 	width = 300
@@ -31,7 +29,7 @@ class Nutrition:
 		right_col_x = middle_col_x + Nutrition.inner_boundary + Nutrition.circle_width
 		
 		first_row_y = Nutrition.outer_boundary
-		second_row_y = first_row_y + Nutrition.circle_width + Nutrition.boundary
+		# second_row_y = first_row_y + Nutrition.circle_width + Nutrition.boundary
 
 		cal_coor = left_col_x, first_row_y, left_col_x + Nutrition.circle_width, first_row_y + Nutrition.circle_width
 		self.arcs["calories"] = self.canvas.create_oval(cal_coor, fill="black")

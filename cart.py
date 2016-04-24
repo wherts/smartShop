@@ -37,13 +37,19 @@ def setup_layout():
 	receipt_container = tk.PanedWindow(parent, orient=tk.VERTICAL)
 	receipt_container.pack()
 
-	#just fill receipt to see it
+	# receipt example
 	receipt = Receipt(parent)
-	for i in range(12):
+	for i in range(4):
 		receipt.add_item("eggs", 3.99)
-	receipt_container.add(receipt.get_root())
+	for i in range(2):
+		receipt.add_item("cheese", 3.99)
+	receipt.add_item("bacon", 5.99)	
+	receipt.add_item("eggs", 3.99)
+
+	receipt.remove_item("cheese")
 
 	cobtn = CheckoutButton(parent, receipt)
+	receipt_container.add(receipt.get_root())
 	receipt_container.add(cobtn.get_root())
 
 	tabs = Tabs(parent)
@@ -67,13 +73,6 @@ def main():
 	#always last
 	pane.mainloop()
 
-
-	# while True:
-	# 	#check for scans
-	# 	if curr_ndbno != -1:
-			
-	# 		pane.update_idletasks()
-	#     	pane.update()
 
 
 if __name__ == '__main__':

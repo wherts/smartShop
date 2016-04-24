@@ -2,6 +2,7 @@
 import Tkinter as tk
 import tkMessageBox
 from ttk import Frame, Style
+import urllib2
 
 class CheckoutButton:
 

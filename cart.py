@@ -18,6 +18,8 @@ max_chars = 15
 pane = tk.Tk()
 pane.title(title)
 
+curr_ndbno = -1
+
 parent = tk.PanedWindow()
 parent.pack(fill=tk.BOTH, expand=1)
 
@@ -57,12 +59,22 @@ def setup_layout():
 	parent.add(tabs.get_root())
 	parent.pack()
 
+	scan.scan(10009)
+
 def main():
 	arrange_pane()
 	setup_layout()
-
 	#always last
 	pane.mainloop()
+
+
+	# while True:
+	# 	#check for scans
+	# 	if curr_ndbno != -1:
+			
+	# 		pane.update_idletasks()
+	#     	pane.update()
+
 
 if __name__ == '__main__':
 	main()

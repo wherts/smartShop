@@ -5,17 +5,19 @@ from ttk import Frame, Style, Notebook
 class Nutrition:
 	height = 450
 	width = 300
-	outer_boundary = 40
-	inner_boundary = 35
-	circle_width = 110
+	outer_boundary = 20
+	inner_boundary = 24
+	rect_width = 430
+	rect_height = 45
 
 	def __init__(self, parent):
 		self.title = "Nutrition"
 		self.root = Frame(parent)
 		self.canvas = tk.Canvas(self.root, bg="blue", height=Nutrition.height, width=Nutrition.width)
 		self.canvas.pack(fill=tk.BOTH)
-		self.arcs = {}
-		self.draw_arcs()
+		self.rects = {}
+		self.draw_rects()
+		remove_from_rect(10, "fiber")
 
 	def get_root(self):
 		return self.root
@@ -23,34 +25,39 @@ class Nutrition:
 	def get_title(self):
 		return self.title
 
-	def draw_arcs(self):
-		left_col_x = Nutrition.outer_boundary
-		middle_col_x = left_col_x + Nutrition.inner_boundary + Nutrition.circle_width
-		right_col_x = middle_col_x + Nutrition.inner_boundary + Nutrition.circle_width
-		
+	def draw_rects(self):
+		left_x = Nutrition.outer_boundary
+
 		first_row_y = Nutrition.outer_boundary
-		# second_row_y = first_row_y + Nutrition.circle_width + Nutrition.boundary
+		second_row_y = first_row_y + Nutrition.rect_height + Nutrition.inner_boundary
+		third_row_y = second_row_y + Nutrition.rect_height + Nutrition.inner_boundary
+		fourth_row_y = third_row_y + Nutrition.rect_height + Nutrition.inner_boundary
+		fifth_row_y = fourth_row_y + Nutrition.rect_height + Nutrition.inner_boundary
+		sixth_row_y = fifth_row_y + Nutrition.rect_height + Nutrition.inner_boundary
 
-		cal_coor = left_col_x, first_row_y, left_col_x + Nutrition.circle_width, first_row_y + Nutrition.circle_width
-		self.arcs["calories"] = self.canvas.create_oval(cal_coor, fill="black")
-		
-		sod_coor = middle_col_x, first_row_y, middle_col_x + Nutrition.circle_width, first_row_y + Nutrition.circle_width
-		self.arcs["sodium"] = self.canvas.create_oval(sod_coor, fill="black")
-		
-		carbs_coor = right_col_x, first_row_y, right_col_x + Nutrition.circle_width, first_row_y + Nutrition.circle_width
-		self.arcs["carbs"] = self.canvas.create_oval(carbs_coor, fill="black")
-		
-		# fiber_coor = right_col_x, second_row_y, right_col_x + Nutrition.circle_width, second_row_y + Nutrition.circle_width
-		# self.arcs["fiber"] = self.canvas.create_oval(fiber_coor, fill="black")
-		
-		# chol_coor = 0, 0, 0, 0
-		# self.arcs["cholesterol"] = self.canvas.create_oval(chol_coor, fill="black")
-		
-		# fat_coor = 0, 0, 0, 0
-		# self.arcs["fat"] = self.canvas.create_oval(fat_coor, fill="black")
-		# coord = 50, 50, 50, 50
-		# arc = self.canvas.create_arc(coord, start=0, extent=359, fill="red")
+		cal_coor = left_x, first_row_y, left_x, first_row_y + Nutrition.rect_height, left_x + Nutrition.rect_width, first_row_y + Nutrition.rect_height, left_x + Nutrition.rect_width, first_row_y
+		self.rects["calories"] = self.canvas.create_polygon(cal_coor, fill="black")
 
+		sod_coor = left_x, second_row_y, left_x, second_row_y + Nutrition.rect_height, left_x + Nutrition.rect_width, second_row_y + Nutrition.rect_height, left_x + Nutrition.rect_width, second_row_y
+		self.rects["sodium"] = self.canvas.create_polygon(sod_coor, fill="black")
+		
+		carbs_coor = left_x, third_row_y, left_x, third_row_y + Nutrition.rect_height, left_x + Nutrition.rect_width, third_row_y + Nutrition.rect_height, left_x + Nutrition.rect_width, third_row_y
+		self.rects["carbs"] = self.canvas.create_polygon(carbs_coor, fill="black")
+		
+		fiber_coor = left_x, fourth_row_y, left_x, fourth_row_y + Nutrition.rect_height, left_x + Nutrition.rect_width, fourth_row_y + Nutrition.rect_height, left_x + Nutrition.rect_width, fourth_row_y
+		self.rects["fiber"] = self.canvas.create_polygon(fiber_coor, fill="black")
+		
+		chol_coor = left_x, fifth_row_y, left_x, fifth_row_y + Nutrition.rect_height, left_x + Nutrition.rect_width, fifth_row_y + Nutrition.rect_height, left_x + Nutrition.rect_width, fifth_row_y
+		self.rects["cholesterol"] = self.canvas.create_polygon(chol_coor, fill="black")
+		
+		fat_coor = left_x, sixth_row_y, left_x, sixth_row_y + Nutrition.rect_height, left_x + Nutrition.rect_width, sixth_row_y + Nutrition.rect_height, left_x + Nutrition.rect_width, sixth_row_y
+		self.rects["fat"] = self.canvas.create_polygon(fat_coor, fill="black")
+
+	def add_to_rect(self, amount, rect):
+		pass
+
+	def remove_from_rect(self, amount, rect):
+		r = self.rects[rect]
 
 # daily values:
 		# Total fat - 65g (less than)

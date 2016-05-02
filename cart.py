@@ -20,7 +20,7 @@ pane.title(title)
 
 curr_ndbno = -1
 
-parent = tk.PanedWindow()
+parent = tk.PanedWindow() #organizes receipt and widgets
 parent.pack(fill=tk.BOTH, expand=1)
 
 def callback():

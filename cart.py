@@ -65,7 +65,7 @@ def setup_layout():
 	parent.add(tabs.get_root())
 	parent.pack()
 
-	scan.scan(10009)
+	# scan.scan("0049000032789")
 
 def main():
 	arrange_pane()

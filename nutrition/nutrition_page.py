@@ -17,7 +17,7 @@ class Nutrition:
 		self.canvas.pack(fill=tk.BOTH)
 		self.rects = {}
 		self.draw_rects()
-		remove_from_rect(10, "fiber")
+		# remove_from_rect(10, "fiber")
 
 	def get_root(self):
 		return self.root

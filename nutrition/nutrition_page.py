@@ -17,15 +17,11 @@ class Nutrition:
 		self.title = "Nutrition"
 		self.root = Frame(parent)
 		self.canvas = tk.Canvas(self.root, height=Nutrition.height, width=Nutrition.width)
-		# self.canvas.create_text(50, 50, text="0.0%")
-		self.canvas.pack(fill=tk.BOTH)
+
 		self.rects = {} #for holding the rectangles, indexed by nutrition type
-		self.pcts = {} #for holding the percent labels, indexed by type of rectangle
 		self.add_items()
-		# self.update_rect(10, "fiber")
-		# self.(self.root, text="0.0%", font=("Helvetica", 26),anchor=tk.CENTER, bg="#E9E9E9")
-		# self.label.pack()
 		self.add_to_rect(-100, "total_fat")
+		self.canvas.pack(fill=tk.BOTH)
 
 	def get_root(self):
 		return self.root
@@ -49,33 +45,9 @@ class Nutrition:
 		self.rects["sodium"] = Item(self.canvas, "Sodium", 2400, left_x, fourth_row_y)
 		self.rects["carbs"] = Item(self.canvas, "Total Carbs", 300, left_x, fifth_row_y)
 		self.rects["fiber"] = Item(self.canvas, "Fiber", 25, left_x, sixth_row_y)
-		# sod_coor = left_x, second_row_y, left_x, second_row_y + Nutrition.rect_height, left_x + Nutrition.rect_width, second_row_y + Nutrition.rect_height, left_x + Nutrition.rect_width, second_row_y
-		# self.rects["sodium"] = self.canvas.create_polygon(sod_coor, fill=Nutrition.rect_fill)
-		#
-		# carbs_coor = left_x, third_row_y, left_x, third_row_y + Nutrition.rect_height, left_x + Nutrition.rect_width, third_row_y + Nutrition.rect_height, left_x + Nutrition.rect_width, third_row_y
-		# self.rects["carbs"] = self.canvas.create_polygon(carbs_coor, fill=Nutrition.rect_fill)
-		#
-		# fiber_coor = left_x, fourth_row_y, left_x, fourth_row_y + Nutrition.rect_height, left_x + Nutrition.rect_width, fourth_row_y + Nutrition.rect_height, left_x + Nutrition.rect_width, fourth_row_y
-		# self.rects["fiber"] = self.canvas.create_polygon(fiber_coor, fill=Nutrition.rect_fill)
-		#
-		# chol_coor = left_x, fifth_row_y, left_x, fifth_row_y + Nutrition.rect_height, left_x + Nutrition.rect_width, fifth_row_y + Nutrition.rect_height, left_x + Nutrition.rect_width, fifth_row_y
-		# self.rects["cholesterol"] = self.canvas.create_polygon(chol_coor, fill=Nutrition.rect_fill)
-		#
-		# fat_coor = left_x, sixth_row_y, left_x, sixth_row_y + Nutrition.rect_height, left_x + Nutrition.rect_width, sixth_row_y + Nutrition.rect_height, left_x + Nutrition.rect_width, sixth_row_y
-		# self.rects["fat"] = self.canvas.create_polygon(fat_coor, fill=Nutrition.rect_fill)
 
 	def add_to_rect(self, amt, rect):
 		self.rects[rect].update(amt)
-
-	# def update_rect(self, amount, rect):
-	# 	r = self.rects[rect]
-	# 	coordinates = self.canvas.coords(r)
-	# 	self.canvas.delete(r)
-	# 	print coordinates
-	# 	for i in range(4, len(coordinates), 2):
-	# 		coordinates[i] = coordinates[i] - amount
-	# 	print coordinates
-	# 	self.canvas.create_polygon(coordinates, fill=Nutrition.rect_fill)
 
 # daily values:
 		# Total fat - 65g (less than)

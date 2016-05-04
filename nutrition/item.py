@@ -33,7 +33,7 @@ class Item:
         self.label = self.canvas.create_text(self.x, self.y, text=self.title, font=("Helvetica", 16), anchor=tk.SW)
 
     def update(self, amt):
-        #delete and readd rectangle and text
+        #delete and read rectangle and text
     	self.canvas.delete(self.rect)
         self.canvas.delete(self.pct_label)
     	for i in range(4, len(self.coordinates), 2):

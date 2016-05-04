@@ -20,11 +20,11 @@ class Nutrition:
 
 		self.rects = {} #for holding the rectangles, indexed by nutrition type
 		self.add_items()
-		self.add_to_rect(10, "total_fat")
-		self.add_to_rect(10, "sat_fat")
-		self.add_to_rect(10, "cholesterol")
-		self.add_to_rect(10, "sodium")
-		self.add_to_rect(10, "carbs")
+		self.update_rect(10, "total_fat")
+		self.update_rect(10, "sat_fat")
+		self.update_rect(10, "cholesterol")
+		self.update_rect(10, "sodium")
+		self.update_rect(10, "carbs")
 		# self.add_to_rect(10, "fiber")
 		self.canvas.pack(fill=tk.BOTH)
 
@@ -51,7 +51,7 @@ class Nutrition:
 		self.rects["carbs"] = Item(self.canvas, "Total Carbs", 300, left_x, fifth_row_y)
 		self.rects["fiber"] = Item(self.canvas, "Fiber", 25, left_x, sixth_row_y)
 
-	def add_to_rect(self, amt, rect):
+	def update_rect(self, amt, rect):
 		self.rects[rect].update(amt)
 
 # daily values:

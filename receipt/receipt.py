@@ -8,12 +8,12 @@ class Receipt:
 		self.root = tk.Listbox(parent, height=27, width=chars, bd=1)
 		self.root.pack(fill=tk.BOTH)
 		
-		# dictionary where key = name, value = [index, price, count]
+		# dictionary where key = name, value = [index, price, count, nutrients]
 		self.items = dict()
 		self.total = 0
 		self.root.insert(0, "Total \t 0.00")
 
-	def add_item(self, item, price):
+	def add_item(self, item, price, nutrients):
 		self.total += price
 		item_name = str(item)
 		pos = self.root.size()-1
@@ -26,11 +26,15 @@ class Receipt:
 		else:
 			self.items[item_name] = [pos, price, 1]
 		
+		# formatting the entry for display
 		entry = item_name + " x " + str(self.items[item_name][2]) + " \t " + str(price * self.items[item_name][2])
 		self.root.insert(pos, entry)
 
 		self.root.delete(self.root.size()-1)
 		self.root.insert(self.root.size(), "Total \t\t " + str(self.total))
+
+		# add nutrients to nutrient information
+		self.items[item_name][3] = nutrients
 
 	def remove_item(self, item):
 		item_name = str(item)
@@ -38,7 +42,10 @@ class Receipt:
 		price = self.items[item_name][1]
 		pos = self.items[item_name][0]
 
+		# remove the item
 		self.root.delete(pos)
+		
+		# if it was the last item left then remove it from the list entirely
 		if count == 1:
 			self.items.pop(item_name)
 		else:
@@ -47,6 +54,8 @@ class Receipt:
 			self.root.insert(pos, entry)
 
 		self.total -= price
+		self.root.delete(self.root.size()-1)
+		self.root.insert(self.root.size(), "Total \t\t " + str(self.total))
 
 	def get_root(self):
 		return self.root

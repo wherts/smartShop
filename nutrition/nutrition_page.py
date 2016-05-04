@@ -20,7 +20,12 @@ class Nutrition:
 
 		self.rects = {} #for holding the rectangles, indexed by nutrition type
 		self.add_items()
-		self.add_to_rect(-100, "total_fat")
+		self.add_to_rect(10, "total_fat")
+		self.add_to_rect(10, "sat_fat")
+		self.add_to_rect(10, "cholesterol")
+		self.add_to_rect(10, "sodium")
+		self.add_to_rect(10, "carbs")
+		self.add_to_rect(10, "fiber")
 		self.canvas.pack(fill=tk.BOTH)
 
 	def get_root(self):

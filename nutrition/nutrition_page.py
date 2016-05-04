@@ -25,7 +25,7 @@ class Nutrition:
 		self.add_to_rect(10, "cholesterol")
 		self.add_to_rect(10, "sodium")
 		self.add_to_rect(10, "carbs")
-		self.add_to_rect(10, "fiber")
+		# self.add_to_rect(10, "fiber")
 		self.canvas.pack(fill=tk.BOTH)
 
 	def get_root(self):

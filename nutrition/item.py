@@ -21,7 +21,7 @@ class Item:
         self.create_label()
 
     def create_rect(self):
-        self.coordinates = [self.x, self.y, self.x, self.y + Item.rect_height, self.x, self.y + Item.rect_height, self.x, self.y]
+        self.coordinates = [self.x, self.y, self.x, self.y + Item.rect_height, self.x + 3, self.y + Item.rect_height, self.x + 3, self.y]
         self.rect = self.canvas.create_polygon(self.coordinates, fill=Item.rect_fill)
 
     def get_pct(self):

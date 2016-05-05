@@ -43,7 +43,7 @@ class Item:
         r = self.get_pct() / 100 #ratio
         y_offset = Item.rect_width * (r / 100.0)
     	for i in range(4, len(self.coordinates), 2):
-    		self.coordinates[i] += y_offset
+    		self.coordinates[i] = y_offset
         #have to redraw rectangle and label
     	self.canvas.create_polygon(self.coordinates, fill=Item.rect_fill)
         self.draw_pct()

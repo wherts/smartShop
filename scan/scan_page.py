@@ -9,7 +9,7 @@ import hmac
 from receipt.receipt import Receipt
 
 class Scan:
-	
+
 	def __init__(self, parent, receipt):
 		self.curr_upc = ""
 		self.receipt = receipt
@@ -21,8 +21,11 @@ class Scan:
 		self.text = tk.Text(self.root, height=1, )
 		self.text.bind("<Key>", self.create_upc)
 		self.text.bind("<Return>", self.scan(self.curr_upc))
+		self.root.bind("<Visibility>", self.on_visibility)
+		self.text.focus_set()
 		self.text.pack()
 		self.label.pack()
+
 
 	def get_root(self):
 		return self.root
@@ -33,21 +36,24 @@ class Scan:
 	def create_upc(self, event):
 		self.curr_upc += event.char
 
+	def on_visibility(self, event):
+		self.text.focus_set()
+
 	# def callback(self, event):
 	# 	self.scan(self.curr_upc)
-	# 	self.curr_upc = ""	
+	# 	self.curr_upc = ""
 
 	def make_auth_token(self, upc_string):
 		user_key = "Yt32S9a6l3Jq3Oc9"
 		# user_key = "Dq92B9r0p7Zg5Pe9"
 		m = hmac.new(user_key, upc_string, hashlib.sha1)
 		return base64.b64encode(m.digest())
-	
+
 	# @param: upc is an identifier number that matches a specific item in the database
 	def scan(self, upc):
 		print upc
 		if upc is "":
-			return 
+			return
 		api_key = "/y1g77AYjOf/"
 		# api_key = "/9ivKrAYSA60"
 
@@ -79,7 +85,7 @@ class Scan:
 
 		#reset the upc code
 		self.curr_upc = ""
-		
+
 #Sample Output
 #		UPC: 020685084850
 #		Calories from Fat, 110, DV: None
@@ -98,5 +104,3 @@ class Scan:
 #		Dietary Fiber, 2 g, DV: 7%
 #		Protein, 3 g, DV: None
 #		Calcium, None, DV: 0%
-			
-

@@ -38,34 +38,38 @@ def setup_layout():
 	receipt_container.pack()
 
 	# receipt example
+	# for i in range(4):
+	# 	receipt.add_item("eggs", 3.99)
+	# for i in range(2):
+	# 	receipt.add_item("cheese", 3.99)
+	# receipt.add_item("bacon", 5.99)	
+	# receipt.add_item("eggs", 3.99)
+
+	# receipt.remove_item("cheese")
+	# receipt.remove_item("cheese")
+
 	receipt = Receipt(parent)
-	for i in range(4):
-		receipt.add_item("eggs", 3.99)
-	for i in range(2):
-		receipt.add_item("cheese", 3.99)
-	receipt.add_item("bacon", 5.99)	
-	receipt.add_item("eggs", 3.99)
-
-	receipt.remove_item("cheese")
-
-	cobtn = CheckoutButton(parent, receipt)
+	CO_button = CheckoutButton(parent, receipt)
 	receipt_container.add(receipt.get_root())
-	receipt_container.add(cobtn.get_root())
+	receipt_container.add(CO_button.get_root())
 
 	tabs = Tabs(parent)
-	scan = Scan(tabs.get_root())
-	nutrition = Nutrition(tabs.get_root())
-	search = Search(tabs.get_root())
+	scan_tab = Scan(tabs.get_root(), receipt)
+	nutrition_tab = Nutrition(tabs.get_root())
+	search_tab = Search(tabs.get_root())
 
-	tabs.add_frame(scan.get_root(), scan.get_title())
-	tabs.add_frame(nutrition.get_root(), nutrition.get_title())
-	tabs.add_frame(search.get_root(), search.get_title())
+	tabs.add_frame(scan_tab.get_root(), scan_tab.get_title())
+	tabs.add_frame(nutrition_tab.get_root(), nutrition_tab.get_title())
+	tabs.add_frame(search_tab.get_root(), search_tab.get_title())
 	
 	parent.add(receipt_container)
 	parent.add(tabs.get_root())
+
 	parent.pack()
 
-	# scan.scan("0049000032789")
+	# scan_tab.scan("049000032789") #poweraid
+	# scan_tab.scan("020685084850") #cape cod chips
+
 
 def main():
 	arrange_pane()

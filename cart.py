@@ -44,29 +44,29 @@ def setup_layout():
 	CO_button = CheckoutButton(parent, receipt)
 	receipt_container.add(receipt.get_root())
 	receipt_container.add(CO_button.get_root())
-	
+
 	scan_tab = Scan(tabs.get_root(), receipt)
 	search_tab = Search(tabs.get_root())
 
 	tabs.add_frame(scan_tab.get_root(), scan_tab.get_title())
 	tabs.add_frame(nutrition_tab.get_root(), nutrition_tab.get_title())
 	tabs.add_frame(search_tab.get_root(), search_tab.get_title())
-	
+
 	parent.add(receipt_container)
 	parent.add(tabs.get_root())
 
 	parent.pack()
 
-#	# receipt example
+	# receipt example
 	for i in range(4):
 		receipt.add_item("eggs", 3.99, {"Cholesterol": 5, "Sodium": 10})
 	for i in range(2):
-		receipt.add_item("cheese", 3.99, {"Cholesterol": 1, "Sodium": 12}) 
-	receipt.add_item("bacon", 5.99, {"Cholesterol": 4, "Sodium": 1000})	
-	receipt.add_item("eggs", 3.99, {"Cholesterol": 2, "Sodium": 2})
+		receipt.add_item("cheese", 3.99, {"Cholesterol": 1, "Sodium": 12})
+	receipt.add_item("bacon", 5.99, {"Cholesterol": 4, "Sodium": 1000})
+	receipt.add_item("eggs", 3.99, {"Cholesterol": 2, "Sodium": 2400})
 
-	receipt.remove_item("cheese")
-	receipt.remove_item("cheese")
+	# receipt.remove_item("cheese")
+	# receipt.remove_item("cheese")
 
 
 	# scan_tab.scan("049000032789") #poweraid

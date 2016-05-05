@@ -21,7 +21,7 @@ class Item:
         self.create_label()
 
     def create_rect(self):
-        self.coordinates = [self.x, self.y, self.x, self.y + Item.rect_height, self.x + 3, self.y + Item.rect_height, self.x + 1, self.y]
+        self.coordinates = [self.x, self.y, self.x, self.y + Item.rect_height, self.x + 3, self.y + Item.rect_height, self.x + 3, self.y]
         self.rect = self.canvas.create_polygon(self.coordinates, fill=Item.rect_fill)
 
     def get_pct(self):
@@ -41,12 +41,14 @@ class Item:
         #update current
         self.current += amt
         r = self.get_pct() / 100 #ratio
-        y_offset = Item.rect_width * (r / 100.0)
-        print "Offset:", y_offset
-        print "Coor:", self.coordinates
+        x_offset = Item.rect_width * r
     	for i in range(4, len(self.coordinates), 2):
-    		self.coordinates[i] = y_offset
-        print "Coor:", self.coordinates
+    		self.coordinates[i] += x_offset
+        #python being shitty, had to make a second loop
+        for i in range(4, len(self.coordinates), 2):
+            if self.coordinates[i] > 450:
+                self.coordinates[i] = 450
+
         #have to redraw rectangle and label
     	self.canvas.create_polygon(self.coordinates, fill=Item.rect_fill)
         self.draw_pct()

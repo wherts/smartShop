@@ -4,7 +4,7 @@ from ttk import Frame, Style
 
 class Receipt:
 
-	def __init__(self, parent, chars=18):
+	def __init__(self, parent, nutrition_tab, chars=18):
 		self.root = tk.Listbox(parent, height=27, width=chars, bd=1)
 		self.root.pack(fill=tk.BOTH)
 		
@@ -12,6 +12,7 @@ class Receipt:
 		self.items = dict()
 		self.total = 0
 		self.root.insert(0, "Total \t 0.00")
+		self.nutrition_tab = nutrition_tab
 
 	def add_item(self, item, price, nutrients):
 		self.total += price
@@ -24,7 +25,7 @@ class Receipt:
 			pos = self.items[item_name][0]
 			self.root.delete(pos)
 		else:
-			self.items[item_name] = [pos, price, 1]
+			self.items[item_name] = [pos, price, 1, nutrients]
 		
 		# formatting the entry for display
 		entry = item_name + " x " + str(self.items[item_name][2]) + " \t " + str(price * self.items[item_name][2])
@@ -33,21 +34,31 @@ class Receipt:
 		self.root.delete(self.root.size()-1)
 		self.root.insert(self.root.size(), "Total \t\t " + str(self.total))
 
-		# add nutrients to nutrient information
-		self.items[item_name][3] = nutrients
+		#update nutrition tab
+		for key in nutrients.keys():
+			quantity = nutrients[key]
+			self.nutrition_tab.update_rect(quantity, key)
 
 	def remove_item(self, item):
 		item_name = str(item)
+		nutrients = self.items[item_name][3]
 		count = self.items[item_name][2]
 		price = self.items[item_name][1]
 		pos = self.items[item_name][0]
 
-		# remove the item
+		# update nutrients page
+		for key in nutrients.keys():
+			quantity = nutrients[key]
+			self.nutrition_tab.update_rect(quantity * -1, key)
+
+
+		# remove the item from the list
 		self.root.delete(pos)
-		
+
 		# if it was the last item left then remove it from the list entirely
 		if count == 1:
 			self.items.pop(item_name)
+		#otherwise 
 		else:
 			self.items[item_name][2] = count - 1
 			entry = item_name + " x " + str(self.items[item_name][2]) + " \t " + str(price * self.items[item_name][2])

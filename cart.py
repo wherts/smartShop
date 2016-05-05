@@ -37,25 +37,15 @@ def setup_layout():
 	receipt_container = tk.PanedWindow(parent, orient=tk.VERTICAL)
 	receipt_container.pack()
 
-	# receipt example
-	# for i in range(4):
-	# 	receipt.add_item("eggs", 3.99)
-	# for i in range(2):
-	# 	receipt.add_item("cheese", 3.99)
-	# receipt.add_item("bacon", 5.99)	
-	# receipt.add_item("eggs", 3.99)
+	tabs = Tabs(parent)
+	nutrition_tab = Nutrition(tabs.get_root())
 
-	# receipt.remove_item("cheese")
-	# receipt.remove_item("cheese")
-
-	receipt = Receipt(parent)
+	receipt = Receipt(parent, nutrition_tab)
 	CO_button = CheckoutButton(parent, receipt)
 	receipt_container.add(receipt.get_root())
 	receipt_container.add(CO_button.get_root())
-
-	tabs = Tabs(parent)
+	
 	scan_tab = Scan(tabs.get_root(), receipt)
-	nutrition_tab = Nutrition(tabs.get_root())
 	search_tab = Search(tabs.get_root())
 
 	tabs.add_frame(scan_tab.get_root(), scan_tab.get_title())
@@ -66,6 +56,18 @@ def setup_layout():
 	parent.add(tabs.get_root())
 
 	parent.pack()
+
+#	# receipt example
+	for i in range(4):
+		receipt.add_item("eggs", 3.99, {"Cholesterol": 5, "Sodium": 10})
+	for i in range(2):
+		receipt.add_item("cheese", 3.99, {"Cholesterol": 1, "Sodium": 12}) 
+	receipt.add_item("bacon", 5.99, {"Cholesterol": 4, "Sodium": 1000})	
+	receipt.add_item("eggs", 3.99, {"Cholesterol": 2, "Sodium": 2})
+
+	receipt.remove_item("cheese")
+	receipt.remove_item("cheese")
+
 
 	# scan_tab.scan("049000032789") #poweraid
 	# scan_tab.scan("020685084850") #cape cod chips

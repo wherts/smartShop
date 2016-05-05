@@ -20,12 +20,12 @@ class Nutrition:
 
 		self.rects = {} #for holding the rectangles, indexed by nutrition type
 		self.add_items()
-		self.update_rect(10, "total_fat")
-		self.update_rect(10, "sat_fat")
-		self.update_rect(10, "cholesterol")
-		self.update_rect(10, "sodium")
-		self.update_rect(10, "carbs")
-		# self.add_to_rect(10, "fiber")
+		# self.update_rect(10, "Total Fat")
+		# self.update_rect(10, "Saturated Fat")
+		# self.update_rect(10, "Cholesterol")
+		# self.update_rect(10, "Sodium")
+		# self.update_rect(10, "Total carbohydrates")
+		# self.add_to_rect(10, "Fiber")
 		self.canvas.pack(fill=tk.BOTH)
 
 	def get_root(self):
@@ -44,12 +44,12 @@ class Nutrition:
 		fifth_row_y = fourth_row_y + Nutrition.rect_height + Nutrition.inner_boundary
 		sixth_row_y = fifth_row_y + Nutrition.rect_height + Nutrition.inner_boundary
 
-		self.rects["total_fat"] = Item(self.canvas, "Total Fat", 65, left_x, first_row_y)
-		self.rects["sat_fat"] = Item(self.canvas, "Sat Fat", 20, left_x, second_row_y)
-		self.rects["cholesterol"] = Item(self.canvas, "Cholesterol", 300, left_x, third_row_y)
-		self.rects["sodium"] = Item(self.canvas, "Sodium", 2400, left_x, fourth_row_y)
-		self.rects["carbs"] = Item(self.canvas, "Total Carbs", 300, left_x, fifth_row_y)
-		self.rects["fiber"] = Item(self.canvas, "Fiber", 25, left_x, sixth_row_y)
+		self.rects["Total Fat"] = Item(self.canvas, "Total Fat", 65, left_x, first_row_y)
+		self.rects["Saturated Fat"] = Item(self.canvas, "Sat Fat", 20, left_x, second_row_y)
+		self.rects["Cholesterol"] = Item(self.canvas, "Cholesterol", 300, left_x, third_row_y)
+		self.rects["Sodium"] = Item(self.canvas, "Sodium", 2400, left_x, fourth_row_y)
+		self.rects["Total carbohydrates"] = Item(self.canvas, "Total Carbs", 300, left_x, fifth_row_y)
+		self.rects["Dietary Fiber"] = Item(self.canvas, "Fiber", 25, left_x, sixth_row_y)
 
 	def update_rect(self, amt, rect):
 		self.rects[rect].update(amt)

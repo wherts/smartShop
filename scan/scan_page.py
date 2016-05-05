@@ -10,8 +10,6 @@ from receipt.receipt import Receipt
 
 class Scan:
 	
-	
-	# @param: parent is a TKinter Notebook 
 	def __init__(self, parent, receipt):
 		self.curr_upc = ""
 		self.receipt = receipt
@@ -40,8 +38,8 @@ class Scan:
 	# 	self.curr_upc = ""	
 
 	def make_auth_token(self, upc_string):
-		# user_key = "Yt32S9a6l3Jq3Oc9"
-		user_key = "Dq92B9r0p7Zg5Pe9"
+		user_key = "Yt32S9a6l3Jq3Oc9"
+		# user_key = "Dq92B9r0p7Zg5Pe9"
 		m = hmac.new(user_key, upc_string, hashlib.sha1)
 		return base64.b64encode(m.digest())
 	
@@ -50,26 +48,34 @@ class Scan:
 		print upc
 		if upc is "":
 			return 
-		# api_key = "/y1g77AYjOf/"
-		api_key = "/9ivKrAYSA60"
+		api_key = "/y1g77AYjOf/"
+		# api_key = "/9ivKrAYSA60"
 
 		signature = self.make_auth_token(upc)
 
-		url = "http://digit-eyes.com/gtin/v2_0/?upc_code="+upc+"&app_key="+api_key+"&signature="+signature+"&language=en&field_names=description, formattedNutrition, image"
+		url = "http://digit-eyes.com/gtin/v2_0/?upc_code="+upc+"&app_key="+api_key+"&signature="+signature+"&language=en&field_names=description,formattedNutrition,image, thumbnail"
 		data = json.load(urllib2.urlopen(url))
+		print data
+		return
 		description = data["description"]
 		nutrients = data["formattedNutrition"]
 
 		#need to get pricing info from store
-		desired_nutrients = ["Calories from Fat", "Saturated"]
-		#send nutrients to receipt
-		nutrients_to_display = dict()
+
+		servings = int(nutrients["Servings Per Container"]["qty"])
+		servings = 2
+		desired_nutrients = ["Total Fat", "Saturated Fat", "Cholesterol", "Sodium", "Total carbohydrates", "Dietary Fiber"]
+		nutrients_amounts = dict()
 		for key in nutrients.keys():
 			if key in desired_nutrients:
-				qty = str(nutrients[key]["qty"])
-				dv = str(nutrients[key]["dv"])
+				qty = int(str(nutrients[key]["qty"]).split()[0]) * servings
+				print qty
+				# dv = str(nutrients[key]["dv"])
+				# newdv = dv.replace("%", "")
+				# nutrients_amounts[key] = [qty, dv]
+				nutrients_amounts[key] = qty
 
-		receipt.add_item(description, 3.99, nutrients_to_display)
+		receipt.add_item(description, 3.99, nutrients_amounts)
 
 		#reset the upc code
 		self.curr_upc = ""
@@ -92,20 +98,5 @@ class Scan:
 #		Dietary Fiber, 2 g, DV: 7%
 #		Protein, 3 g, DV: None
 #		Calcium, None, DV: 0%
-		
-
-
-		# total fat, saturated fat, trans fat, cholesterol, sodium, total carbs
-		# fiber, sugar, protein, Vitamin A, Vitamin C, Calcium, Iron
-
-		# daily values:
-		# Total fat - 65g (less than)
-		# Sat fat - 20g (less than)
-		# Cholesterol - 300mg (less than)
-		# Sodium - 2400mg (less than)
-		# Total Carb - 300 g (at least)
-		# Fiber - 25 g (at least)
-
-
-		
+			
 

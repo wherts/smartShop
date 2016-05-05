@@ -23,9 +23,3 @@ class Tabs:
 
 	def get_root(self):
 		return self.root
-
-	def on_click(self, evt):
-		print evt.x, evt.y
-		# print self.root.select()
-		# print self.root.select()
-		# print self.frames[self.root.select()]

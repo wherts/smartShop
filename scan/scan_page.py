@@ -9,6 +9,7 @@ import hmac
 from receipt.receipt import Receipt
 
 class Scan:
+	bg_color = "#E9E9E9"
 
 	def __init__(self, parent, receipt):
 		self.curr_upc = ""
@@ -17,8 +18,8 @@ class Scan:
 		self.title = "Scan"
 		self.root = Frame(parent)
 		self.prompt = "Scan Item to Add\n it to Your Cart"
-		self.label = tk.Label(self.root, text=self.prompt, font=("Helvetica", 26),anchor=tk.CENTER, bg="#E9E9E9", pady=170)
-		self.text = tk.Text(self.root, height=1, )
+		self.label = tk.Label(self.root, text=self.prompt, font=("Helvetica", 26),anchor=tk.CENTER, bg=Scan.bg_color, pady=170)
+		self.text = tk.Text(self.root, height=1, width=1, fg=Scan.bg_color, bg=Scan.bg_color, highlightcolor=Scan.bg_color, insertbackground=Scan.bg_color)
 		self.text.bind("<Key>", self.create_upc)
 		self.text.bind("<Return>", self.scan(self.curr_upc))
 		self.root.bind("<Visibility>", self.on_visibility)

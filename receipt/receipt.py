@@ -7,7 +7,7 @@ class Receipt:
 	def __init__(self, parent, nutrition_tab, chars=18):
 		self.root = tk.Listbox(parent, height=27, width=chars, bd=1)
 		self.root.pack(fill=tk.BOTH)
-		
+
 		# dictionary where key = name, value = [index, price, count, nutrients]
 		self.items = dict()
 		self.total = 0
@@ -26,7 +26,7 @@ class Receipt:
 			self.root.delete(pos)
 		else:
 			self.items[item_name] = [pos, price, 1, nutrients]
-		
+
 		# formatting the entry for display
 		entry = item_name + " x " + str(self.items[item_name][2]) + " \t " + str(price * self.items[item_name][2])
 		self.root.insert(pos, entry)
@@ -38,6 +38,7 @@ class Receipt:
 		for key in nutrients.keys():
 			quantity = nutrients[key]
 			self.nutrition_tab.update_rect(quantity, key)
+			break
 
 	def remove_item(self, item):
 		item_name = str(item)
@@ -58,7 +59,7 @@ class Receipt:
 		# if it was the last item left then remove it from the list entirely
 		if count == 1:
 			self.items.pop(item_name)
-		#otherwise 
+		#otherwise
 		else:
 			self.items[item_name][2] = count - 1
 			entry = item_name + " x " + str(self.items[item_name][2]) + " \t " + str(price * self.items[item_name][2])

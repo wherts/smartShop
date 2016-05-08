@@ -10,7 +10,8 @@ import hmac
 from receipt.receipt import Receipt
 
 class Scan:
-	
+	bg_color = "#E9E9E9"
+
 	def __init__(self, parent, receipt):
 		self.curr_upc = ""
 		self.receipt = receipt
@@ -18,12 +19,15 @@ class Scan:
 		self.title = "Scan"
 		self.root = Frame(parent)
 		self.prompt = "Scan Item to Add\n it to Your Cart"
-		self.label = tk.Label(self.root, text=self.prompt, font=("Helvetica", 26),anchor=tk.CENTER, bg="#E9E9E9", pady=170)
-		self.text = tk.Text(self.root, height=1, )
+		self.label = tk.Label(self.root, text=self.prompt, font=("Helvetica", 26),anchor=tk.CENTER, bg=Scan.bg_color, pady=170)
+		self.text = tk.Text(self.root, height=1, width=1, fg=Scan.bg_color, bg=Scan.bg_color, highlightcolor=Scan.bg_color, insertbackground=Scan.bg_color)
 		self.text.bind("<Key>", self.create_upc)
 		self.text.bind("<Return>", self.scan(self.curr_upc))
+		self.root.bind("<Visibility>", self.on_visibility)
+		self.text.focus_set()
 		self.text.pack()
 		self.label.pack()
+
 
 	def get_root(self):
 		return self.root
@@ -34,9 +38,12 @@ class Scan:
 	def create_upc(self, event):
 		self.curr_upc += event.char
 
+	def on_visibility(self, event):
+		self.text.focus_set()
+
 	# def callback(self, event):
 	# 	self.scan(self.curr_upc)
-	# 	self.curr_upc = ""	
+	# 	self.curr_upc = ""
 
 	def make_auth_token(self, upc_string):
 		# user_key = "Yt32S9a6l3Jq3Oc9"
@@ -44,7 +51,7 @@ class Scan:
 		user_key = "Gk93Y4w4e5Fl6Pe4" #ioe.smartshop@gmail.com
 		m = hmac.new(user_key, upc_string, hashlib.sha1)
 		return base64.b64encode(m.digest())
-	
+
 	# @param: upc is an identifier number that matches a specific item in the database
 	def scan(self, upc):
 		print upc
@@ -81,7 +88,7 @@ class Scan:
 
 		#reset the upc code
 		self.curr_upc = ""
-		
+
 #Sample Output
 #		UPC: 020685084850
 #		Calories from Fat, 110, DV: None
@@ -100,5 +107,3 @@ class Scan:
 #		Dietary Fiber, 2 g, DV: 7%
 #		Protein, 3 g, DV: None
 #		Calcium, None, DV: 0%
-			
-

@@ -1,6 +1,7 @@
 #!/usr/bin/python
 import Tkinter as tk
 from ttk import Frame, Style, Notebook
+import re
 import urllib2
 import json
 import base64
@@ -38,8 +39,9 @@ class Scan:
 	# 	self.curr_upc = ""	
 
 	def make_auth_token(self, upc_string):
-		user_key = "Yt32S9a6l3Jq3Oc9"
+		# user_key = "Yt32S9a6l3Jq3Oc9"
 		# user_key = "Dq92B9r0p7Zg5Pe9"
+		user_key = "Gk93Y4w4e5Fl6Pe4" #ioe.smartshop@gmail.com
 		m = hmac.new(user_key, upc_string, hashlib.sha1)
 		return base64.b64encode(m.digest())
 	
@@ -48,34 +50,34 @@ class Scan:
 		print upc
 		if upc is "":
 			return 
-		api_key = "/y1g77AYjOf/"
+		# api_key = "/y1g77AYjOf/"
 		# api_key = "/9ivKrAYSA60"
-
+		api_key = "/7LZow+CLrFl" #ioe.smartshop@gmail.com
 		signature = self.make_auth_token(upc)
 
-		url = "http://digit-eyes.com/gtin/v2_0/?upc_code="+upc+"&app_key="+api_key+"&signature="+signature+"&language=en&field_names=description,formattedNutrition,image, thumbnail"
+		url = "http://digit-eyes.com/gtin/v2_0/?upc_code="+upc+"&app_key="+api_key+"&signature="+signature+"&language=en&field_names=description,brand,formattedNutrition,image,thumbnail"
 		data = json.load(urllib2.urlopen(url))
-		print data
-		return
 		description = data["description"]
 		nutrients = data["formattedNutrition"]
 
+		print "Description: ", description
+
 		#need to get pricing info from store
 
-		servings = int(nutrients["Servings Per Container"]["qty"])
+		servings = float(nutrients["Servings Per Container"]["qty"])
 		servings = 2
 		desired_nutrients = ["Total Fat", "Saturated Fat", "Cholesterol", "Sodium", "Total carbohydrates", "Dietary Fiber"]
 		nutrients_amounts = dict()
 		for key in nutrients.keys():
 			if key in desired_nutrients:
-				qty = int(str(nutrients[key]["qty"]).split()[0]) * servings
-				print qty
+				#split quantity on numeric value
+				qty = float(re.findall(r'\d+|\D+', str(nutrients[key]["qty"]))[0])
 				# dv = str(nutrients[key]["dv"])
 				# newdv = dv.replace("%", "")
 				# nutrients_amounts[key] = [qty, dv]
-				nutrients_amounts[key] = qty
+				nutrients_amounts[key] = qty * servings
 
-		receipt.add_item(description, 3.99, nutrients_amounts)
+		self.receipt.add_item(description, 3.99, nutrients_amounts)
 
 		#reset the upc code
 		self.curr_upc = ""

@@ -58,18 +58,17 @@ def setup_layout():
 	parent.pack()
 
 #	# receipt example
-	for i in range(4):
-		receipt.add_item("eggs", 3.99, {"Cholesterol": 5, "Sodium": 10})
-	for i in range(2):
-		receipt.add_item("cheese", 3.99, {"Cholesterol": 1, "Sodium": 12}) 
-	receipt.add_item("bacon", 5.99, {"Cholesterol": 4, "Sodium": 1000})	
-	receipt.add_item("eggs", 3.99, {"Cholesterol": 2, "Sodium": 2})
+	# for i in range(4):
+	# 	receipt.add_item("eggs", 3.99, {"Cholesterol": 5, "Sodium": 10})
+	# for i in range(2):
+	# 	receipt.add_item("cheese", 3.99, {"Cholesterol": 1, "Sodium": 12}) 
+	# receipt.add_item("bacon", 5.99, {"Cholesterol": 4, "Sodium": 1000})	
+	# receipt.add_item("eggs", 3.99, {"Cholesterol": 2, "Sodium": 2})
 
-	receipt.remove_item("cheese")
-	receipt.remove_item("cheese")
+	# receipt.remove_item("cheese")
+	# receipt.remove_item("cheese")
 
-
-	# scan_tab.scan("049000032789") #poweraid
+	scan_tab.scan("049000032789") #poweraid
 	# scan_tab.scan("020685084850") #cape cod chips
 
 

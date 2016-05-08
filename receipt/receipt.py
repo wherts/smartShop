@@ -6,12 +6,13 @@ class RemoveButton:
 	def __init__(self, parent, receipt):
 		self.label = "Remove"
 		self.receipt = receipt
-		self.root = tk.Button(parent, text=self.label, command=self.on_click, padx=0, pady=0)
+		self.root = tk.Button(parent, text=self.label, command=self.on_click, padx=0, pady=0, bg="#e50000")
 
 	def on_click(self):
 		curr_entry = self.receipt.get_root().get(self.receipt.get_root().curselection())
-		curr_item_name = self.receipt.get_name_from_entry(curr_entry)
-		self.receipt.remove_item(curr_item_name)
+		if curr_entry.split()[0] != "Total": 
+			curr_item_name = self.receipt.get_name_from_entry(curr_entry)
+			self.receipt.remove_item(curr_item_name)
 		self.receipt.get_root().selection_clear(0)
 
 	def get_root(self):
@@ -70,7 +71,6 @@ class Receipt:
 		for key in nutrients.keys():
 			quantity = nutrients[key]
 			self.nutrition_tab.update_rect(quantity * -1, key)
-
 
 		# remove the item from the list
 		self.root.delete(pos)

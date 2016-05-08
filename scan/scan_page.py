@@ -55,8 +55,8 @@ class Scan:
 		if "formattedNutrition" in data: nutrients = data["formattedNutrition"]
 		if "thumbnail" in data: thumbnail_img_url = data["thumbnail"]
 
-		print "Description: ", description
-		print data
+		# print "Description: ", description
+		# print data
 
 		#servings in item
 		servings = 1

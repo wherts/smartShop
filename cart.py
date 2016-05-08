@@ -13,7 +13,7 @@ from search.search_page import Search
 
 title = "SmartShop"
 width = 700
-height = 500
+height = 520
 max_chars = 15
 pane = tk.Tk()
 pane.title(title)

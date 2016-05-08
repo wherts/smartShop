@@ -51,12 +51,12 @@ class Scan:
 
 		data = self.get_data(upc)
 		
-		if "description" in data: description = data["description"]
-		if "formattedNutrition" in data: nutrients = data["formattedNutrition"]
-		if "thumbnail" in data: thumbnail_img_url = data["thumbnail"]
+		description = data["description"]
+		nutrients = data["formattedNutrition"]
+		thumbnail_img_url = data["thumbnail"]
 
-		# print "Description: ", description
-		# print data
+		print "Description: ", description
+		print data
 
 		#servings in item
 		servings = 1
@@ -86,7 +86,7 @@ class Scan:
 
 		api_key = "/7LZow+CLrFl" #ioe.smartshop@gmail.com
 		user_key = "Gk93Y4w4e5Fl6Pe4" #ioe.smartshop@gmail.com
-		
+
 		#create hashed signature based on user key
 		m = hmac.new(user_key, upc, hashlib.sha1)
 		signature = base64.b64encode(m.digest())

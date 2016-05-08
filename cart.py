@@ -3,7 +3,7 @@ import Tkinter as tk
 from ttk import Frame, Style, Notebook
 
 #custom classes
-from receipt.receipt import Receipt
+from receipt.receipt import Receipt, RemoveButton
 from checkout.checkout import CheckoutButton
 from header.header import Header
 from tab.tablayout import Tabs
@@ -41,8 +41,10 @@ def setup_layout():
 	nutrition_tab = Nutrition(tabs.get_root())
 
 	receipt = Receipt(parent, nutrition_tab)
+	remove_button = RemoveButton(parent, receipt)
 	CO_button = CheckoutButton(parent, receipt)
 	receipt_container.add(receipt.get_root())
+	receipt_container.add(remove_button.get_root())
 	receipt_container.add(CO_button.get_root())
 
 	scan_tab = Scan(tabs.get_root(), receipt)

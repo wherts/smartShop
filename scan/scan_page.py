@@ -22,7 +22,7 @@ class Scan:
 		self.label = tk.Label(self.root, text=self.prompt, font=("Helvetica", 26),anchor=tk.CENTER, bg=Scan.bg_color, pady=170)
 		self.text = tk.Text(self.root, height=1, width=1, fg=Scan.bg_color, bg=Scan.bg_color, highlightcolor=Scan.bg_color, insertbackground=Scan.bg_color)
 		self.text.bind("<Key>", self.create_upc)
-		self.text.bind("<Return>", self.scan(self.curr_upc))
+		self.text.bind("<Return>", self.callback)
 		self.root.bind("<Visibility>", self.on_visibility)
 		self.text.focus_set()
 		self.text.pack()
@@ -35,75 +35,63 @@ class Scan:
 	def get_title(self):
 		return self.title
 
-	def create_upc(self, event):
-		self.curr_upc += event.char
-
 	def on_visibility(self, event):
 		self.text.focus_set()
 
-	# def callback(self, event):
-	# 	self.scan(self.curr_upc)
-	# 	self.curr_upc = ""
+	def create_upc(self, event):
+		self.curr_upc += event.char
+		print self.curr_upc
 
-	def make_auth_token(self, upc_string):
-		# user_key = "Yt32S9a6l3Jq3Oc9"
-		# user_key = "Dq92B9r0p7Zg5Pe9"
-		user_key = "Gk93Y4w4e5Fl6Pe4" #ioe.smartshop@gmail.com
-		m = hmac.new(user_key, upc_string, hashlib.sha1)
-		return base64.b64encode(m.digest())
+	def callback(self, event):
+		self.scan(self.curr_upc)
+		self.curr_upc = ""
 
 	# @param: upc is an identifier number that matches a specific item in the database
 	def scan(self, upc):
-		print upc
-		if upc is "":
-			return 
-		# api_key = "/y1g77AYjOf/"
-		# api_key = "/9ivKrAYSA60"
-		api_key = "/7LZow+CLrFl" #ioe.smartshop@gmail.com
-		signature = self.make_auth_token(upc)
 
-		url = "http://digit-eyes.com/gtin/v2_0/?upc_code="+upc+"&app_key="+api_key+"&signature="+signature+"&language=en&field_names=description,brand,formattedNutrition,image,thumbnail"
-		data = json.load(urllib2.urlopen(url))
-		description = data["description"]
-		nutrients = data["formattedNutrition"]
+		data = self.get_data(upc)
+		
+		if "description" in data: description = data["description"]
+		if "formattedNutrition" in data: nutrients = data["formattedNutrition"]
+		if "thumbnail" in data: thumbnail_img_url = data["thumbnail"]
 
 		print "Description: ", description
+		print data
 
-		#need to get pricing info from store
-
-		servings = float(nutrients["Servings Per Container"]["qty"])
-		servings = 2
+		#servings in item
+		servings = 1
+		if "Servings Per Container" in nutrients: servings = float(nutrients["Servings Per Container"]["qty"])
+		
+		# pull out desired nutrients to be sent to receipt
 		desired_nutrients = ["Total Fat", "Saturated Fat", "Cholesterol", "Sodium", "Total carbohydrates", "Dietary Fiber"]
 		nutrients_amounts = dict()
 		for key in nutrients.keys():
 			if key in desired_nutrients:
-				#split quantity on numeric value
+				#splits quantity on numeric value
 				qty = float(re.findall(r'\d+|\D+', str(nutrients[key]["qty"]))[0])
+				nutrients_amounts[key] = qty * servings
+
 				# dv = str(nutrients[key]["dv"])
 				# newdv = dv.replace("%", "")
 				# nutrients_amounts[key] = [qty, dv]
-				nutrients_amounts[key] = qty * servings
 
+		# still need pricing data
+		# add new item to receipt with description, price, nutrients
 		self.receipt.add_item(description, 3.99, nutrients_amounts)
 
-		#reset the upc code
-		self.curr_upc = ""
+	def get_data(self, upc):
+		print "UPC:", upc
+		if upc is "":
+			return 
 
-#Sample Output
-#		UPC: 020685084850
-#		Calories from Fat, 110, DV: None
-#		Sugars, 0 g, DV: None
-#		Trans Fat, 0 g, DV: None
-#		Sodium, 160 mg, DV: 7%
-#		Iron, None, DV: 2%
-#		Cholesterol, 0 mg, DV: 0%
-#		Calories, 220, DV: None
-#		Servings Per Container, 1, DV: None
-#		Vitamin C, None, DV: 15%
-#		Saturated Fat, 1 g, DV: 4%
-#		Vitamin A, None, DV: 0%
-#		Serving Size, 1.0 package, DV: None
-#		Total Fat, 12 g, DV: 18%
-#		Dietary Fiber, 2 g, DV: 7%
-#		Protein, 3 g, DV: None
-#		Calcium, None, DV: 0%
+		api_key = "/7LZow+CLrFl" #ioe.smartshop@gmail.com
+		user_key = "Gk93Y4w4e5Fl6Pe4" #ioe.smartshop@gmail.com
+		
+		#create hashed signature based on user key
+		m = hmac.new(user_key, upc, hashlib.sha1)
+		signature = base64.b64encode(m.digest())
+
+		url = "http://digit-eyes.com/gtin/v2_0/?upc_code="+upc+"&app_key="+api_key+"&signature="+signature+"&language=en&field_names=description,brand,formattedNutrition,image,thumbnail"
+		data = json.load(urllib2.urlopen(url))
+
+		return data

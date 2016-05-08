@@ -84,9 +84,10 @@ class Scan:
 		if upc is "":
 			return 
 
-		api_key = "/7LZow+CLrFl" #ioe.smartshop@gmail.com
-		user_key = "Gk93Y4w4e5Fl6Pe4" #ioe.smartshop@gmail.com
-
+		# api_key = "/7LZow+CLrFl" #ioe.smartshop@gmail.com
+		api_key = "/1i5tDRLniW0 " #ioe.smartshop2@gmail.com
+		# user_key = "Gk93Y4w4e5Fl6Pe4" #ioe.smartshop@gmail.com
+		user_key = "Ky74S9i9g1Jd7Qd1" #ioe.smartshop2@gmail.com
 		#create hashed signature based on user key
 		m = hmac.new(user_key, upc, hashlib.sha1)
 		signature = base64.b64encode(m.digest())

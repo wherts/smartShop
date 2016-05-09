@@ -70,7 +70,7 @@ def setup_layout():
 	# receipt.remove_item("cheese")
 	# receipt.remove_item("cheese")
 
-	# scan_tab.scan("049000032789") #poweraid
+	scan_tab.scan("049000032789") #poweraid
 	# scan_tab.scan("020685084850") #cape cod chips
 
 

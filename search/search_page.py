@@ -12,7 +12,10 @@ class Search:
 		self.root = Frame(parent)
 		self.text = tk.Text(self.root, height=1, )
 		self.text.bind("<Key>", self.build_word)
+<<<<<<< HEAD
 		self.text.bind("<BackSpace>", self.delete)
+=======
+>>>>>>> f219c49377601f9d7bb035567c9ea564ec5b4927
 		self.text.bind("<Return>", self.lookup)
 		self.text.pack()
 		self.build_dict()

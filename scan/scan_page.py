@@ -15,6 +15,7 @@ class Scan:
 	def __init__(self, parent, receipt):
 		self.curr_upc = ""
 		self.receipt = receipt
+		self.curr_img_url = ""
 
 		self.title = "Scan"
 		self.root = Frame(parent)
@@ -53,7 +54,7 @@ class Scan:
 		
 		description = data["description"]
 		nutrients = data["formattedNutrition"]
-		thumbnail_img_url = data["thumbnail"]
+		self.curr_img_url = data["thumbnail"]
 
 		print "Description: ", description
 		print data
@@ -78,6 +79,28 @@ class Scan:
 		# still need pricing data
 		# add new item to receipt with description, price, nutrients
 		self.receipt.add_item(description, 3.99, nutrients_amounts)
+
+		image_byt = urlopen(self.curr_img_url).read()
+		image_b64 = base64.encodestring(image_byt)
+		photo = tk.PhotoImage(data=image_b64)
+		# create a white canvas
+		cv = tk.Canvas(bg='white')
+		cv.pack(side='top', fill='both', expand='yes')
+		# put the image on the canvas with
+		# create_image(xpos, ypos, image, anchor)
+		cv.create_image(10, 10, image=photo, anchor='nw')
+	
+	def get_curr_img(self):
+		return self.curr_img_url
+
+	# def show_image(self):
+	# 	title = "Item added to your Cart"
+	# 	msg = "checkout time!"
+
+	# 	if self.receipt.size() < 1:
+	# 		msg = "cart is empty!"
+
+	# 	tkMessageBox.showinfo(title, msg)
 
 	def get_data(self, upc):
 		print "UPC:", upc

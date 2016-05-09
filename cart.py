@@ -13,7 +13,7 @@ from search.search_page import Search
 
 title = "SmartShop"
 width = 700
-height = 1000
+height = 520
 max_chars = 15
 pane = tk.Tk()
 pane.title(title)
@@ -30,7 +30,7 @@ def arrange_pane():
 	sc_height = pane.winfo_screenheight()
 	sc_width = pane.winfo_screenwidth()
 	x = 0
-	y = sc_height/2
+	y = 0
 	pane.geometry('%dx%d+%d+%d' % (width, height, x, y))
 
 def setup_layout():

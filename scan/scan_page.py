@@ -60,7 +60,7 @@ class Scan:
 
 		#servings in item
 		servings = 1
-		if "Servings Per Container" in nutrients: servings = float(nutrients["Servings Per Container"]["qty"])
+		# if "Servings Per Container" in nutrients: servings = float(nutrients["Servings Per Container"]["qty"])
 		
 		# pull out desired nutrients to be sent to receipt
 		desired_nutrients = ["Total Fat", "Saturated Fat", "Cholesterol", "Sodium", "Total carbohydrates", "Dietary Fiber"]

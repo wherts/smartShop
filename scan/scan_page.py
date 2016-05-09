@@ -5,6 +5,7 @@ import re
 import urllib2
 import json
 import base64
+import io
 import hashlib
 import hmac
 from receipt.receipt import Receipt

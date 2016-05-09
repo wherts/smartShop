@@ -80,15 +80,13 @@ class Scan:
 		# add new item to receipt with description, price, nutrients
 		self.receipt.add_item(description, 3.99, nutrients_amounts)
 
+
 		image_byt = urlopen(self.curr_img_url).read()
 		image_b64 = base64.encodestring(image_byt)
 		photo = tk.PhotoImage(data=image_b64)
-		# create a white canvas
-		cv = tk.Canvas(bg='white')
-		cv.pack(side='top', fill='both', expand='yes')
-		# put the image on the canvas with
-		# create_image(xpos, ypos, image, anchor)
-		cv.create_image(10, 10, image=photo, anchor='nw')
+		self.label = tk.Label(self.root, image=photo, text=self.prompt, font=("Helvetica", 26),anchor=tk.CENTER, bg=Scan.bg_color, pady=170)
+		self.label.image = photo
+		self.label.pack()
 	
 	def get_curr_img(self):
 		return self.curr_img_url

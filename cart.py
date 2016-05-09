@@ -13,7 +13,7 @@ from search.search_page import Search
 
 title = "SmartShop"
 width = 700
-height = 520
+height = 1000
 max_chars = 15
 pane = tk.Tk()
 pane.title(title)
@@ -70,7 +70,7 @@ def setup_layout():
 	# receipt.remove_item("cheese")
 	# receipt.remove_item("cheese")
 
-	scan_tab.scan("049000032789") #poweraid
+	# scan_tab.scan("049000032789") #poweraid
 	# scan_tab.scan("020685084850") #cape cod chips
 
 

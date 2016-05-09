@@ -10,7 +10,7 @@ class Search:
 		self.root = Frame(parent)
 		self.text = tk.Text(self.root, height=1, )
 		self.text.bind("<Key>", self.build_word)
-		self.text.bind("<Return>", self.lookup(self.curr_search))
+		self.text.bind("<Return>", self.lookup)
 		self.text.pack()
 
 	def get_root(self):
@@ -23,7 +23,7 @@ class Search:
 		self.curr_search += event.char
 	
 	# @param: upc is an identifier number that matches a specific item in the database
-	def lookup(self, search):
+	def lookup(self, event):
 		self.curr_search = ""
 		print search
 		if search is "":

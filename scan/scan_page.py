@@ -16,8 +16,7 @@ class Scan:
 	def __init__(self, parent, receipt):
 		self.curr_upc = ""
 		self.receipt = receipt
-		self.curr_img_url = ""
-
+		
 		self.title = "Scan"
 		self.root = Frame(parent)
 		self.prompt = "Scan Item to Add\n it to Your Cart"
@@ -55,7 +54,7 @@ class Scan:
 		
 		description = data["description"]
 		nutrients = data["formattedNutrition"]
-		self.curr_img_url = data["thumbnail"]
+		# curr_img_url = data["thumbnail"]
 
 		print "Description: ", description
 		print data
@@ -81,7 +80,7 @@ class Scan:
 		# add new item to receipt with description, price, nutrients
 		self.receipt.add_item(description, 3.99, nutrients_amounts)
 
-		# image_byt = urllib2.urlopen(self.curr_img_url).read()
+		# image_byt = urllib2.urlopen(curr_img_url).read()
 		# image_b64 = base64.encodestring(image_byt)
 		# photo = tk.PhotoImage(data=image_b64)
 		# self.label = tk.Label(self.root, image=photo, text=self.prompt, font=("Helvetica", 26),anchor=tk.CENTER, bg=Scan.bg_color, pady=170)
@@ -95,8 +94,12 @@ class Scan:
 
 		# api_key = "/7LZow+CLrFl" #ioe.smartshop@gmail.com
 		api_key = "/1i5tDRLniW0" #ioe.smartshop2@gmail.com
+		# api_key = "/5L6JpJVLpCI"
+
 		# user_key = "Gk93Y4w4e5Fl6Pe4" #ioe.smartshop@gmail.com
 		user_key = "Ky74S9i9g1Jd7Qd1" #ioe.smartshop2@gmail.com
+		# user_key = "Eb58I1n1j7Xj0By2"
+
 		#create hashed signature based on user key
 		m = hmac.new(user_key, upc, hashlib.sha1)
 		signature = base64.b64encode(m.digest())

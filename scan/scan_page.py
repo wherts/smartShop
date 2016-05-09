@@ -81,17 +81,13 @@ class Scan:
 		# add new item to receipt with description, price, nutrients
 		self.receipt.add_item(description, 3.99, nutrients_amounts)
 
-
-		image_byt = urllib2.urlopen(self.curr_img_url).read()
-		image_b64 = base64.encodestring(image_byt)
-		photo = tk.PhotoImage(data=image_b64)
-		self.label = tk.Label(self.root, image=photo, text=self.prompt, font=("Helvetica", 26),anchor=tk.CENTER, bg=Scan.bg_color, pady=170)
-		self.label.image = photo
-		self.label.pack()
+		# image_byt = urllib2.urlopen(self.curr_img_url).read()
+		# image_b64 = base64.encodestring(image_byt)
+		# photo = tk.PhotoImage(data=image_b64)
+		# self.label = tk.Label(self.root, image=photo, text=self.prompt, font=("Helvetica", 26),anchor=tk.CENTER, bg=Scan.bg_color, pady=170)
+		# self.label.image = photo
+		# self.label.pack()
 	
-	def get_curr_img(self):
-		return self.curr_img_url
-
 	def get_data(self, upc):
 		print "UPC:", upc
 		if upc is "":

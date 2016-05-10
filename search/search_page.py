@@ -26,12 +26,16 @@ class Search:
 		self.text.grid(row=0, column=1, columnspan=2)
 
 	def build_dict(self):
-		#specific item
-		self.items["dorito"] = ["Doritos Nacho Cheese,$4.00,Aisle 5", "Doritos Cooler Ranch,$4.00,Aisle 5", "Doritos Pizza Flavored,$4.00,Aisle 5"]
 		#search for brand
-		self.items["kellogg's"] = ["Lucky Charms, $2.89, Aisle 3", "Cinnamon Toast Crunch, $3.00, Aisle 3", "Cocoa Puffs, $2.70, Aisle 3", "Raisin Bran, $4.00, Aisle 3"]
+		self.items["dorito"] = ["Doritos Nacho Cheese $4.00 Aisle 5", "Doritos Cooler Ranch $4.00 Aisle 5", "Doritos Pizza Flavored $4.00 Aisle 5"]
+		self.items["oreos"] = ["Double Stuf Oreos $5.50 Aisle 9"]
+		self.items["lays"] = ["Lays $3.00 Aisle 9"]
+		self.items["kelloggs"] = ["Froot Loops $2.89 Aisle 3", "Frosted Flakes $3.00 Aisle 3", "Cocoa Krispies $2.70 Aisle 3", "Apple Jacks $4.00 Aisle 3", "Corn Pops $2.70 Aisle 3"]
+
 		#search for food type
-		self.items["cereal"] = ["Lucky Charms, $2.89, Aisle 3", "Cinnamon Toast Crunch, $3.00, Aisle 3", "Cocoa Puffs, $2.70, Aisle 3", "Raisin Bran, $4.00, Aisle 3"]
+		self.items["cereal"] = ["Lucky Charms $2.89 Aisle 3", "Cinnamon Toast Crunch $3.00 Aisle 3", "Cocoa Puffs $2.70 Aisle 3", "Raisin Bran $4.00 Aisle 3", "Froot Loops $2.89 Aisle 3", "Frosted Flakes $3.00 Aisle 3", "Cocoa Krispies $2.70 Aisle 3", "Apple Jacks $4.00 Aisle 3", "Corn Pops $2.70 Aisle 3"]
+		self.items["cookies"] = ["Double Stuf Oreos $5.50 Aisle 9"]
+		self.items["chips"] = ["Cheez-its $4.50 Aisle 9", "Doritos Nacho Cheese $4.00 Aisle 5", "Doritos Cooler Ranch $4.00 Aisle 5", "Doritos Pizza Flavored $4.00 Aisle 5", "Lays $3.00 Aisle 9"]
 
 	def get_root(self):
 		return self.root

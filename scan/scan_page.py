@@ -16,7 +16,7 @@ class Scan:
 	def __init__(self, parent, receipt):
 		self.curr_upc = ""
 		self.receipt = receipt
-		
+
 		self.title = "Scan"
 		self.root = Frame(parent)
 		self.prompt = "Scan Item to Add\n it to Your Cart"
@@ -51,7 +51,7 @@ class Scan:
 	def scan(self, upc):
 
 		data = self.get_data(upc)
-		
+
 		description = data["description"]
 		nutrients = data["formattedNutrition"]
 		# curr_img_url = data["thumbnail"]
@@ -62,7 +62,7 @@ class Scan:
 		#servings in item
 		servings = 1
 		# if "Servings Per Container" in nutrients: servings = float(nutrients["Servings Per Container"]["qty"])
-		
+
 		# pull out desired nutrients to be sent to receipt
 		desired_nutrients = ["Total Fat", "Saturated Fat", "Cholesterol", "Sodium", "Total carbohydrates", "Dietary Fiber"]
 		nutrients_amounts = dict()
@@ -86,11 +86,11 @@ class Scan:
 		# self.label = tk.Label(self.root, image=photo, text=self.prompt, font=("Helvetica", 26),anchor=tk.CENTER, bg=Scan.bg_color, pady=170)
 		# self.label.image = photo
 		# self.label.pack()
-	
+
 	def get_data(self, upc):
 		print "UPC:", upc
 		if upc is "":
-			return 
+			return
 
 		# api_key = "/7LZow+CLrFl" #ioe.smartshop@gmail.com
 		api_key = "/1i5tDRLniW0" #ioe.smartshop2@gmail.com

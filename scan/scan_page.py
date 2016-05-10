@@ -57,7 +57,8 @@ class Scan:
 		# curr_img_url = data["thumbnail"]
 
 		print "Description: ", description
-		print data
+		print nutrients
+		print "---------"
 
 		#servings in item
 		servings = 1
@@ -68,6 +69,7 @@ class Scan:
 		nutrients_amounts = dict()
 		for key in nutrients.keys():
 			if key in desired_nutrients:
+				print nutrients[key]
 				#splits quantity on numeric value
 				qty = float(re.findall(r'\d+|\D+', str(nutrients[key]["qty"]))[0])
 				nutrients_amounts[key] = qty * servings

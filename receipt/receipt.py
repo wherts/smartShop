@@ -55,6 +55,7 @@ class Receipt:
 
 		#update nutrition tab
 		for key in nutrients.keys():
+			print key, ": ", nutrients[key]
 			quantity = nutrients[key]
 			self.nutrition_tab.update_rect(quantity, key)
 			break

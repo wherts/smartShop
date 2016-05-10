@@ -24,6 +24,7 @@ class Search:
 		#spacing
 		tk.Label(self.root, text="Search:", font=("Helvetica", 16), bg=Search.bg_color).grid(row=0, column=0)
 		self.text.grid(row=0, column=1, columnspan=2)
+		self.labels = []
 
 	def build_dict(self):
 		#search for brand

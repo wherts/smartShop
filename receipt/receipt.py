@@ -54,6 +54,7 @@ class Receipt:
 		self.root.insert(self.root.size(), "Total \t\t " + str(self.total))
 
 		#update nutrition tab
+		print nutrients
 		for key in nutrients.keys():
 			print key, ": ", nutrients[key]
 			quantity = nutrients[key]

@@ -52,7 +52,7 @@ class Search:
 
 	# @param: upc is an identifier number that matches a specific item in the database
 	def lookup(self, event):
-		# self.labels = []
+		self.labels = []
 		for k in self.items.keys():
 			if k.lower().startswith(self.curr_search):
 				for i, t in enumerate(self.items[k]):

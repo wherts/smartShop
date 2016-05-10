@@ -90,8 +90,7 @@ def checkQueue():
 
 			print "next in line is " + upNext
 			print "numPeople in queue: " + str(numPeopleInQueue)
-			print len(queueName)
-			print len(upNext)
+			
 			if queueName + "\n" == upNext:
 				message = "You (" + queueName + ") are first in line! Please proceed to the checkout line now!"
 				# global t
@@ -107,10 +106,10 @@ def checkQueue():
 		try:
 			t
 		except NameError:
-			t = threading.Timer(5, checkQueue)
+			t = threading.Timer(30, checkQueue)
 			t.start()
 		else:
-			t = threading.Timer(5, checkQueue)
+			t = threading.Timer(30, checkQueue)
 			t.start()
 		
 		

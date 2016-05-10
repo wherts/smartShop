@@ -59,7 +59,6 @@ class Receipt:
 			print key, ": ", nutrients[key]
 			quantity = nutrients[key]
 			self.nutrition_tab.update_rect(quantity, key)
-			break
 
 	def remove_item(self, item):
 		item_name = str(item)

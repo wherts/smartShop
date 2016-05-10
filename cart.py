@@ -106,10 +106,10 @@ def checkQueue():
 		try:
 			t
 		except NameError:
-			t = threading.Timer(30, checkQueue)
+			t = threading.Timer(25, checkQueue)
 			t.start()
 		else:
-			t = threading.Timer(30, checkQueue)
+			t = threading.Timer(25, checkQueue)
 			t.start()
 		
 		

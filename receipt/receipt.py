@@ -70,6 +70,7 @@ class Receipt:
 		# update nutrients page
 		for key in nutrients.keys():
 			quantity = nutrients[key]
+			print "removing",quantity,"from",key
 			self.nutrition_tab.update_rect(quantity * -1, key)
 
 		# remove the item from the list

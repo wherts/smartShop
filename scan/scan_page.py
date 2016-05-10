@@ -70,7 +70,11 @@ class Scan:
 		for key in nutrients.keys():
 			if key in desired_nutrients:
 				#splits quantity on numeric value
-				qty = float(re.findall(r'\d+|\D+', str(nutrients[key]["qty"]))[0])
+				qty = (re.findall(r'\d+|\D+', str(nutrients[key]["qty"]))[0])
+				if qty == None:
+					qty = 0
+				else:
+					qty = float(qty)
 				nutrients_amounts[key] = qty * servings
 
 				# dv = str(nutrients[key]["dv"])

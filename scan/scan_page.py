@@ -71,7 +71,7 @@ class Scan:
 			if key in desired_nutrients:
 				#splits quantity on numeric value
 				qty = (re.findall(r'\d+|\D+', str(nutrients[key]["qty"]))[0])
-				if qty == None:
+				if qty == "None":
 					qty = 0
 				else:
 					qty = float(qty)

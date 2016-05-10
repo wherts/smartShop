@@ -60,5 +60,7 @@ class Search:
 				for i, t in enumerate(self.items[k]):
 					# split_t = t.split(",")
 					# for j in range(len(split_t)):
-					tk.Label(self.root, text=t, font=("Helvetica", 14), bg=Search.bg_color, pady=5).grid(row=i+1, column=1)
+					l = tk.Label(self.root, text=t, font=("Helvetica", 14), bg=Search.bg_color, pady=5)
+					l.grid(row=i+1, column=1)
+					self.labels.append(l)
 		self.curr_search = ""

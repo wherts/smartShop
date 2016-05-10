@@ -52,6 +52,8 @@ class Search:
 
 	# @param: upc is an identifier number that matches a specific item in the database
 	def lookup(self, event):
+		for l in self.labels:
+			l.grid_forget()
 		self.labels = []
 		for k in self.items.keys():
 			if k.lower().startswith(self.curr_search):

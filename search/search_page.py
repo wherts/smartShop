@@ -12,10 +12,7 @@ class Search:
 		self.root = Frame(parent)
 		self.text = tk.Text(self.root, height=1, )
 		self.text.bind("<Key>", self.build_word)
-<<<<<<< HEAD
 		self.text.bind("<BackSpace>", self.delete)
-=======
->>>>>>> f219c49377601f9d7bb035567c9ea564ec5b4927
 		self.text.bind("<Return>", self.lookup)
 		self.text.pack()
 		self.build_dict()
@@ -23,11 +20,11 @@ class Search:
 
 	def build_dict(self):
 		#specific item
-		self.items["dorito"] = ["Dorito Information: Name, Price, Aisle/Location"]
+		self.items["dorito"] = ["Doritos Nacho Cheese, $4.00, 5", "Doritos Cooler Ranch, $4.00, 5", "Doritos Pizza Flavored, $4.00, 5"]
 		#search for brand
-		self.items["kellogg's"] = ["All of Kellogg's cereals", "Lucky Charms", "Cinnamon Toast Crunch"]
+		self.items["kellogg's"] = ["Lucky Charms, $2.89, Aisle 3", "Cinnamon Toast Crunch, $3.00, Aisle 3", "Cocoa Puffs, $2.70, Aisle 3", "Raisin Bran, $4.00, Aisle 3"]
 		#search for food type
-		self.items["cereal"] = ["All cereals in the store"]
+		self.items["cereal"] = ["Lucky Charms, $2.89, Aisle 3", "Cinnamon Toast Crunch, $3.00, Aisle 3", "Cocoa Puffs, $2.70, Aisle 3", "Raisin Bran, $4.00, Aisle 3"]
 
 	def get_root(self):
 		return self.root

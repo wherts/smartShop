@@ -57,7 +57,8 @@ class Scan:
 		# curr_img_url = data["thumbnail"]
 
 		print "Description: ", description
-		print data
+		print nutrients
+		print "---------"
 
 		#servings in item
 		servings = 1
@@ -68,6 +69,7 @@ class Scan:
 		nutrients_amounts = dict()
 		for key in nutrients.keys():
 			if key in desired_nutrients:
+				print nutrients[key]
 				#splits quantity on numeric value
 				qty = float(re.findall(r'\d+|\D+', str(nutrients[key]["qty"]))[0])
 				nutrients_amounts[key] = qty * servings
@@ -94,11 +96,11 @@ class Scan:
 
 		# api_key = "/7LZow+CLrFl" #ioe.smartshop@gmail.com
 		api_key = "/1i5tDRLniW0" #ioe.smartshop2@gmail.com
-		api_key = "/5L6JpJVLpCI"
+		# api_key = "/5L6JpJVLpCI"
 
 		# user_key = "Gk93Y4w4e5Fl6Pe4" #ioe.smartshop@gmail.com
 		user_key = "Ky74S9i9g1Jd7Qd1" #ioe.smartshop2@gmail.com
-		user_key = "Eb58I1n1j7Xj0By2"
+		# user_key = "Eb58I1n1j7Xj0By2"
 
 		#create hashed signature based on user key
 		m = hmac.new(user_key, upc, hashlib.sha1)

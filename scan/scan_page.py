@@ -69,7 +69,6 @@ class Scan:
 		nutrients_amounts = dict()
 		for key in nutrients.keys():
 			if key in desired_nutrients:
-				print key, ": ", nutrients[key]
 				#splits quantity on numeric value
 				qty = float(re.findall(r'\d+|\D+', str(nutrients[key]["qty"]))[0])
 				nutrients_amounts[key] = qty * servings

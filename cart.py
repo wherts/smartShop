@@ -1,6 +1,8 @@
 #!/usr/bin/python
 import Tkinter as tk
 from ttk import Frame, Style, Notebook
+import threading
+import tkMessageBox
 
 #custom classes
 from receipt.receipt import Receipt, RemoveButton
@@ -23,6 +25,97 @@ curr_ndbno = -1
 parent = tk.PanedWindow() #organizes receipt and widgets
 parent.pack(fill=tk.BOTH, expand=1)
 
+
+global queueName
+global inQ
+global t
+
+
+def addToQueue(nameInQueue):
+	global queueName 
+	queueName = nameInQueue
+	print "Added " + nameInQueue + " to the queue"
+	
+	# t.start()
+
+
+	global inQ
+	inQ = True
+	checkQueue()
+	
+
+
+def removeFromQueue(nameInQueue):
+	f = open("queue.txt","r+")
+	lines = f.readlines()
+	f.seek(0)
+	for line in lines:
+		if line != nameInQueue + "\n":
+			f.write(line)
+		else:
+			print nameInQueue + " has been removed from queue"
+	f.truncate()
+	f.close()
+
+	global inQ
+	inQ = False
+
+
+	title = "Dequeued"
+	msg = "You (user#" + nameInQueue + ") have been removed from the queue. Happy SmartShopping!"
+	
+	tkMessageBox.showinfo(title, msg)
+
+	global t
+	# t = threading.Timer(5, checkQueue)
+	t.cancel()
+
+
+
+def checkQueue():
+	global queueName, inQ, t
+	if inQ:
+	# 	t = threading.Timer(5, checkQueue).start()
+	# else:
+		f = open("queue.txt","r+")
+		lines = f.readlines()
+		f.seek(0)
+		if len(lines) > 0:
+			upNext = lines[0]
+			numPeopleInQueue = 0
+			for line in lines:
+				numPeopleInQueue += 1
+				if line == queueName + "\n":
+					numInQueue = numPeopleInQueue
+
+			print "next in line is " + upNext
+			print "numPeople in queue: " + str(numPeopleInQueue)
+			print len(queueName)
+			print len(upNext)
+			if queueName + "\n" == upNext:
+				message = "You (" + queueName + ") are first in line! Please proceed to the checkout line now!"
+				# global t
+				# global T
+				# t.cancel()
+				# T = threading.Timer(15, checkQueue).start()
+			else:
+
+				message="There are " + str(numPeopleInQueue) + " people in line and you(" + queueName + ") are number " + str(numInQueue) +". You will be notified every 30 seconds on your queue status. Happy smartShopping!"
+			tkMessageBox.showinfo("Queue status: ", message)
+		f.close()
+		global t
+		try:
+			t
+		except NameError:
+			t = threading.Timer(5, checkQueue)
+			t.start()
+		else:
+			t = threading.Timer(5, checkQueue)
+			t.start()
+		
+		
+
+
 def callback():
 	print "press"
 
@@ -42,7 +135,7 @@ def setup_layout():
 
 	receipt = Receipt(parent, nutrition_tab)
 	remove_button = RemoveButton(parent, receipt)
-	CO_button = CheckoutButton(parent, receipt)
+	CO_button = CheckoutButton(parent, receipt, addToQueue, removeFromQueue)
 	receipt_container.add(receipt.get_root())
 	receipt_container.add(remove_button.get_root())
 	receipt_container.add(CO_button.get_root())
@@ -72,6 +165,7 @@ def setup_layout():
 
 	# scan_tab.scan("049000032789") #poweraid
 	# scan_tab.scan("020685084850") #cape cod chips
+
 
 
 def main():

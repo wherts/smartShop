@@ -98,11 +98,11 @@ class Scan:
 			return
 
 		# api_key = "/7LZow+CLrFl" #ioe.smartshop@gmail.com
-		api_key = "/y1g77AYjOf"
+		api_key = "/waE+F/WTEgU"
 		# api_key = "/5L6JpJVLpCI"
 
 		# user_key = "Gk93Y4w4e5Fl6Pe4" #ioe.smartshop@gmail.com
-		user_key = "Yt32S9a6l3Jq3Oc9" #ioe.smartshop2@gmail.com
+		user_key = "Zj16I9n3c5Ry1Hl5" #ioe.smartshop2@gmail.com
 		# user_key = "Eb58I1n1j7Xj0By2"
 
 		#create hashed signature based on user key
